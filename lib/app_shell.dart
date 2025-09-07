@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart'; // Import the home screen
 import 'chat_screen.dart'; // Import the chat screen
+import 'profile_screen.dart'; // Import the profile screen
+import 'leaderboard_screen.dart'; // Import the leaderboard screen
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
@@ -20,14 +22,8 @@ class _AppShellState extends State<AppShell> {
       'Play Screen',
       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
     ), // Placeholder for Play
-    const Text(
-      'Leaderboard Screen',
-      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-    ), // Placeholder for Leaderboard
-    const Text(
-      'Profile Screen',
-      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-    ), // Placeholder for Profile
+    const LeaderboardScreen(), // Leaderboard Screen
+    const ProfileScreen(), // Profile Screen
   ];
 
   void _onItemTapped(int index) {
