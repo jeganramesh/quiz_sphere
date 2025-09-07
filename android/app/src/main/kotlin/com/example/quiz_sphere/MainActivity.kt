@@ -1,4 +1,4 @@
-package com.example.temp
+package com.example.quiz_sphere
 
 import io.flutter.embedding.android.FlutterActivity
 
