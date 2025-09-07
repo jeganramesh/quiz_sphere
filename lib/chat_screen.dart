@@ -1,226 +1,159 @@
 import 'package:flutter/material.dart';
+import '../models/message.dart';
+import '../services/api_service.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
-
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final TextEditingController _textController = TextEditingController();
-  final List<ChatMessage> _messages = [];
+  final TextEditingController _messageController = TextEditingController();
+  final List<Message> _messages = [];
+  final ScrollController _scrollController = ScrollController();
+  bool _isLoading = false;
+  final ApiService _apiService = ApiService(
+    baseUrl: 'http://192.168.1.7:8000',
+  ); // Use your desired base URL
 
   @override
   void initState() {
     super.initState();
-    // Initial AI message
+    // Add welcome message
     _messages.add(
-      ChatMessage(
-        text: 'Hello, I am Quiz Sphere AI.\nHow Can I help you?',
+      Message(
+        text:
+            "Hi! I'm your Quiz Sphere AI assistant. How can I help you today?",
         isUser: false,
-        showBrainIcon: true,
+        timestamp: DateTime.now(),
       ),
     );
   }
 
-  void _handleSubmitted(String text) {
-    _textController.clear();
+  void _sendMessage() async {
+    final text = _messageController.text.trim();
+    if (text.isEmpty) return;
+
+    // Add user message
     setState(() {
-      _messages.add(ChatMessage(text: text, isUser: true));
+      _messages.add(
+        Message(text: text, isUser: true, timestamp: DateTime.now()),
+      );
+      _isLoading = true;
     });
-    // Simulate AI response
-    _simulateAiResponse(text);
-  }
 
-  void _simulateAiResponse(String userMessage) {
-    Future.delayed(const Duration(seconds: 1), () {
+    _messageController.clear();
+    _scrollToBottom();
+
+    // Get AI response
+    try {
+      final aiResponse = await _apiService.sendMessage(text);
+
       setState(() {
-        if (userMessage.toLowerCase().contains(
-          'quiz game about indian prime minister',
-        )) {
-          _messages.add(
-            ChatMessage(
-              text: 'Okay. I created the Quiz.\nClick to start Quiz.',
-              isUser: false,
-              showStartQuizButton: true,
-            ),
-          );
-        } else {
-          _messages.add(
-            ChatMessage(
-              text: 'I am still learning. Please try asking about a quiz.',
-              isUser: false,
-            ),
-          );
-        }
+        _messages.add(
+          Message(text: aiResponse, isUser: false, timestamp: DateTime.now()),
+        );
+        _isLoading = false;
       });
-    });
+    } catch (e) {
+      setState(() {
+        _messages.add(
+          Message(
+            text: "Sorry, I encountered an error. Please try again.",
+            isUser: false,
+            timestamp: DateTime.now(),
+          ),
+        );
+        _isLoading = false;
+      });
+    }
+
+    _scrollToBottom();
   }
 
-  Widget _buildMessage(ChatMessage message) {
-    return Align(
-      alignment: message.isUser ? Alignment.centerRight : Alignment.centerLeft,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color: message.isUser ? const Color(0xFF34D399) : Colors.grey[200],
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (message.showBrainIcon)
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(
-                    Icons.psychology_outlined, // Placeholder icon
-                    color: Color(0xFF34D399),
-                    size: 24,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    message.text,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: message.isUser ? Colors.white : Colors.black,
-                    ),
-                  ),
-                ],
-              )
-            else
-              Text(
-                message.text,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: message.isUser ? Colors.white : Colors.black,
-                ),
-              ),
-            if (message.showStartQuizButton)
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Handle start quiz
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF34D399), // Green button
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 30,
-                      vertical: 15,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'Start Quiz',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context); // Navigate back to the previous screen
-          },
-        ),
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Quiz Sphere ',
-              style: TextStyle(
-                fontFamily:
-                    'Playfair Display', // Assuming a custom font based on image
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'AI',
-              style: TextStyle(
-                color: Color(0xFF34D399), // Green color for AI
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            onPressed: () {
-              // Handle more options
-            },
-          ),
-        ],
-        centerTitle: true,
+        title: Text('Quiz Sphere Chat'),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
       ),
       body: Column(
         children: [
+          // Messages List
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.all(16.0),
+              controller: _scrollController,
+              padding: EdgeInsets.all(16),
               itemCount: _messages.length,
               itemBuilder: (context, index) {
-                return _buildMessage(_messages[index]);
+                final message = _messages[index];
+                return _buildMessageBubble(message);
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+
+          // Loading indicator
+          if (_isLoading)
+            Padding(
+              padding: EdgeInsets.all(8),
+              child: Row(
+                children: [
+                  SizedBox(width: 16),
+                  SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                  SizedBox(width: 8),
+                  Text('AI is typing...'),
+                ],
+              ),
+            ),
+
+          // Input Area
+          Container(
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.grey[100],
+              border: Border(top: BorderSide(color: Colors.grey[300]!)),
+            ),
             child: Row(
               children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.image_outlined,
-                    color: Color(0xFF34D399),
-                  ),
-                  onPressed: () {
-                    // Handle image upload
-                  },
-                ),
                 Expanded(
                   child: TextField(
-                    controller: _textController,
-                    onSubmitted: _handleSubmitted,
+                    controller: _messageController,
                     decoration: InputDecoration(
-                      hintText: 'Just type your doubt !',
+                      hintText: 'Type your message...',
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(25),
                       ),
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
                       ),
                     ),
+                    onSubmitted: (_) => _sendMessage(),
                   ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.mic_none, color: Colors.grey),
-                  onPressed: () {
-                    // Handle voice input
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.send, color: Color(0xFF34D399)),
-                  onPressed: () => _handleSubmitted(_textController.text),
+                SizedBox(width: 8),
+                FloatingActionButton(
+                  mini: true,
+                  onPressed: _isLoading ? null : _sendMessage,
+                  child: Icon(Icons.send),
                 ),
               ],
             ),
@@ -229,18 +162,55 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
-}
 
-class ChatMessage {
-  final String text;
-  final bool isUser;
-  final bool showBrainIcon;
-  final bool showStartQuizButton;
+  Widget _buildMessageBubble(Message message) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 16),
+      child: Row(
+        mainAxisAlignment:
+            message.isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: [
+          if (!message.isUser) ...[
+            CircleAvatar(
+              backgroundColor: Colors.blue,
+              child: Icon(Icons.smart_toy, color: Colors.white, size: 20),
+              radius: 16,
+            ),
+            SizedBox(width: 8),
+          ],
+          Flexible(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              decoration: BoxDecoration(
+                color: message.isUser ? Colors.blue : Colors.grey[200],
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Text(
+                message.text,
+                style: TextStyle(
+                  color: message.isUser ? Colors.white : Colors.black87,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+          if (message.isUser) ...[
+            SizedBox(width: 8),
+            CircleAvatar(
+              backgroundColor: Colors.green,
+              child: Icon(Icons.person, color: Colors.white, size: 20),
+              radius: 16,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
 
-  ChatMessage({
-    required this.text,
-    required this.isUser,
-    this.showBrainIcon = false,
-    this.showStartQuizButton = false,
-  });
+  @override
+  void dispose() {
+    _messageController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
 }

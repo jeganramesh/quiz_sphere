@@ -13,18 +13,18 @@ class _AppShellState extends State<AppShell> {
   int _selectedIndex = 0;
 
   // List of widgets to display each tab's contents
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(), // Home Screen
     ChatScreen(), // Chat Screen
-    Text(
+    const Text(
       'Play Screen',
       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
     ), // Placeholder for Play
-    Text(
+    const Text(
       'Leaderboard Screen',
       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
     ), // Placeholder for Leaderboard
-    Text(
+    const Text(
       'Profile Screen',
       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
     ), // Placeholder for Profile
