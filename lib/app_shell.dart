@@ -3,6 +3,7 @@ import 'home_screen.dart'; // Import the home screen
 import 'chat_screen.dart'; // Import the chat screen
 import 'profile_screen.dart'; // Import the profile screen
 import 'leaderboard_screen.dart'; // Import the leaderboard screen
+import 'game_screen.dart'; // Import the game screen
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
@@ -18,10 +19,7 @@ class _AppShellState extends State<AppShell> {
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(), // Home Screen
     ChatScreen(), // Chat Screen
-    const Text(
-      'Play Screen',
-      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-    ), // Placeholder for Play
+    const GameScreen(), // Game Screen
     const LeaderboardScreen(), // Leaderboard Screen
     const ProfileScreen(), // Profile Screen
   ];

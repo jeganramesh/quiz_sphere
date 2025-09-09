@@ -13,7 +13,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final ScrollController _scrollController = ScrollController();
   bool _isLoading = false;
   final ApiService _apiService = ApiService(
-    baseUrl: 'http://192.168.1.7:8000',
+    baseUrl: 'http://192.168.56.1:8000',
   ); // Use your desired base URL
 
   @override
@@ -88,7 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Quiz Sphere Chat'),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xFF34D399),
         foregroundColor: Colors.white,
       ),
       body: Column(
@@ -172,7 +172,7 @@ class _ChatScreenState extends State<ChatScreen> {
         children: [
           if (!message.isUser) ...[
             CircleAvatar(
-              backgroundColor: Colors.blue,
+              backgroundColor: const Color(0xFF34D399),
               child: Icon(Icons.smart_toy, color: Colors.white, size: 20),
               radius: 16,
             ),
@@ -182,7 +182,8 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(
-                color: message.isUser ? Colors.blue : Colors.grey[200],
+                color:
+                    message.isUser ? const Color(0xFF34D399) : Colors.grey[200],
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Text(
@@ -197,7 +198,7 @@ class _ChatScreenState extends State<ChatScreen> {
           if (message.isUser) ...[
             SizedBox(width: 8),
             CircleAvatar(
-              backgroundColor: Colors.green,
+              backgroundColor: const Color(0xFF34D399),
               child: Icon(Icons.person, color: Colors.white, size: 20),
               radius: 16,
             ),
