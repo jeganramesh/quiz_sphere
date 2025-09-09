@@ -3,6 +3,20 @@
 Perfect Jegan 👍 Here’s a **clean README section** you can paste into your `README.md` to document how you pushed your Flutter app to GitHub and worked with branches.
 
 ---
+# How to download github in Windows
+
+Using winget tool
+Install winget tool if you don't already have it, then type this command in command prompt or Powershell.
+
+ ```bash
+   winget install --id Git.Git -e --source winget
+ ```
+The current source code release is version 2.51.0. If you want the newer version, you can build it from the source code.
+     ##or
+https://git-scm.com/downloads/win
+
+
+---
 
 # 📌 GitHub Workflow – Quiz Sphere App
 
