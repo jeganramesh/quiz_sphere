@@ -1,0 +1,452 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5; /* Light background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.chat-container {
+  width: 100%; /* Adjusted for better responsiveness */
+  max-width: 500px; /* Max width for larger screens */
+  height: 750px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5px;
+}
+
+.chat-header {
+  background-color: #28c76f; /* Green header */
+  color: white;
+  padding: 15px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Distribute space between items */
+  align-items: center; /* Vertically align items */
+}
+
+.header-left,
+.header-right {
+  flex-basis: 20%; /* Allocate space for left and right sections */
+}
+
+.header-center {
+  flex-grow: 1; /* Allow center section to grow */
+  text-align: center; /* Center the title */
+}
+
+.header-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px; /* Icon size */
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-button:hover {
+  opacity: 0.8;
+}
+
+.game-button {
+  /* Specific styles for game button if needed */
+}
+
+.back-button {
+  /* Specific styles for back button if needed */
+}
+
+.chat-box {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto; /* Scrollable chat messages */
+  background-color: #f0f2f5; /* Light background for chat area */
+}
+
+.chat-message {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.bot-avatar {
+  background-color: #28c76f; /* Green for bot avatar */
+  margin-right: 10px;
+}
+
+.user-avatar {
+  background-color: #28c76f; /* Green for user avatar */
+  margin-left: 10px;
+}
+
+.chat-message p {
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 70%;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.bot-message p {
+  background-color: #e0e0e0; /* Light grey for bot messages */
+  color: #333;
+  text-align: left;
+  border-bottom-left-radius: 2px;
+}
+
+.user-message {
+  justify-content: flex-end;
+}
+
+.user-message p {
+  background-color: #28c76f; /* Green for user messages */
+  color: white;
+  text-align: right;
+  border-bottom-right-radius: 2px;
+}
+
+.input-container {
+  display: flex;
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  align-items: center;
+}
+
+input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #28c76f;
+}
+
+button {
+  background-color: #28c76f; /* Green send button */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Circular button */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: #23a05c; /* Darker green on hover */
+}
+
+/* Markdown Formatting Styles */
+
+/* Headings */
+.chat-message h1,
+.chat-message h2,
+.chat-message h3,
+.chat-message h4 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333; /* Darker color for headings */
+}
+
+.chat-message h1 { font-size: 24px; }
+.chat-message h2 { font-size: 20px; }
+.chat-message h3 { font-size: 18px; }
+.chat-message h4 { font-size: 16px; }
+
+/* Bold and Italic - often handled by browser defaults, but can ensure consistency */
+.chat-message strong,
+.chat-message b {
+  font-weight: bold;
+}
+
+.chat-message em,
+.chat-message i {
+  font-style: italic;
+}
+
+/* Strikethrough */
+.chat-message del,
+.chat-message s {
+  text-decoration: line-through;
+  color: #888; /* Lighter color for strikethrough */
+}
+
+/* Monospace Text / Inline Code */
+.chat-message code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  background-color: #e0e0e0; /* Light grey background for inline code */
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* Blockquotes */
+.chat-message blockquote {
+  border-left: 4px solid #28c76f; /* Green accent for blockquotes */
+  padding-left: 10px;
+  margin-left: 0;
+  color: #555;
+  font-style: italic;
+}
+
+/* Lists */
+.chat-message ul,
+.chat-message ol {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 25px; /* Indentation for list items */
+}
+
+.chat-message li {
+  margin-bottom: 5px;
+}
+
+/* Horizontal Rules */
+.chat-message hr {
+  border: 0;
+  height: 1px;
+  background-color: #eee; /* Light grey horizontal rule */
+  margin: 20px 0;
+}
+
+/* Links */
+.chat-message a {
+  color: #28c76f; /* Green links */
+  text-decoration: none;
+}
+
+.chat-message a:hover {
+  text-decoration: underline;
+}
+
+/* Images */
+.chat-message img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Code Blocks */
+.chat-message pre {
+  background-color: #f8f8f8; /* Slightly darker background for code blocks */
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto; /* Enable horizontal scrolling for code blocks */
+  margin: 10px 0;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.chat-message pre code {
+  background-color: transparent; /* Remove background from nested code */
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+/* Tables */
+.chat-message table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+  font-size: 0.9em;
+}
+
+.chat-message th,
+.chat-message td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.chat-message th {
+  background-color: #f2f2f2; /* Light grey for table headers */
+  font-weight: bold;
+}
+
+.chat-message tr:nth-child(even) {
+  background-color: #f9f9f9; /* Zebra striping for table rows */
+}
+
+/* Ensure markdown elements are contained within the message bubble */
+.chat-message > h1,
+.chat-message > h2,
+.chat-message > h3,
+.chat-message > h4,
+.chat-message > p,
+.chat-message > ul,
+.chat-message > ol,
+.chat-message > hr,
+.chat-message > blockquote,
+.chat-message > table,
+.chat-message > pre {
+  margin-top: 0; /* Reset top margin for elements directly in chat-message */
+  margin-bottom: 0; /* Reset bottom margin for elements directly in chat-message */
+}
+
+/* Adjust specific element margins within the message bubble */
+.chat-message h1,
+.chat-message h2,
+.chat-message h3,
+.chat-message h4 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.chat-message ul,
+.chat-message ol {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.chat-message hr {
+  margin: 20px 0;
+}
+
+.chat-message table {
+  margin: 15px 0;
+}
+
+.chat-message pre {
+  margin: 10px 0;
+}
+
+/* Ensure code blocks and tables do not overflow their container */
+.chat-message pre,
+.chat-message table {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Adjust padding for elements within the message bubble */
+.chat-message p {
+  padding: 10px 15px;
+  border-radius: 18px;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+/* Ensure markdown elements are contained within the message bubble and respect its width */
+/* These selectors target markdown elements that are direct children of .chat-message */
+.chat-message > h1,
+.chat-message > h2,
+.chat-message > h3,
+.chat-message > h4,
+.chat-message > p,
+.chat-message > ul,
+.chat-message > ol,
+.chat-message > hr,
+.chat-message > blockquote,
+.chat-message > table,
+.chat-message > pre {
+  max-width: 100%; /* Allow these elements to take up to 100% of their parent's width */
+  box-sizing: border-box;
+}
+
+/* Apply the max-width to the message bubble itself */
+.bot-message p,
+.user-message p {
+  max-width: 80%; /* This defines the width of the message bubble */
+}
+
+/* Ensure code blocks and tables are responsive and aligned within the bubble */
+/* These selectors target code blocks and tables that are direct children of .chat-message */
+.chat-message > pre,
+.chat-message > table {
+  width: 100%; /* Make them take full width of the bubble */
+  max-width: 100%; /* Ensure they don't exceed the bubble width */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Specific adjustments for code blocks and tables within message bubbles */
+.chat-message pre {
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto; /* Enable horizontal scrolling for code blocks */
+}
+
+.chat-message table {
+  border-collapse: collapse;
+}
+
+.chat-message th,
+.chat-message td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.chat-message th {
+  background-color: #f2f2f2; /* Light grey for table headers */
+  font-weight: bold;
+}
+
+.chat-message tr:nth-child(even) {
+  background-color: #f9f9f9; /* Zebra striping for table rows */
+}
+
+/* Game Container Styles */
+.game-container {
+  flex: 1;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f2f5; /* Match chat background */
+  padding: 20px;
+  overflow-y: auto; /* Allow scrolling if game content is long */
+}
+
+.game-container h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.game-container p {
+  color: #555;
+  font-size: 16px;
+}
