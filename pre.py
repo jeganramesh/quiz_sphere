@@ -1,8 +1,7 @@
 import requests
+import os
 
-API_KEY = "AIzaSyC911NQEQSuSBh1FUQ9ACJRYXkbPL1XWRw"
-API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
-
+API_KEY = os.environ.get("GEMINI_API_KEY", "") # Set your Gemini API key as an environment variable named GEMINI_API_KEYAIzaSyCjw6M9RjAB_UTb3giAwuHG_10SAEbKrBQ
 def chat_with_gemini(prompt):
     headers = {"Content-Type": "application/json"}
     body = {
