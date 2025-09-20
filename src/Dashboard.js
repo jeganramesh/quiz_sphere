@@ -13,8 +13,8 @@ function Dashboard() {
         <ul className="nav-links">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/dashboard" className="active">Dashboard</Link></li>
-          <li><a href="#">Leaderboard</a></li>
-          <li><a href="#">Subjects</a></li>
+          <li><Link to="/leaderboard">Leaderboard</Link></li>
+          <li><Link to="/subjects">Subjects</Link></li>
         </ul>
         <div className="nav-actions">
           <span className="notif-icon">🔔</span>

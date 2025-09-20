@@ -17,7 +17,7 @@ function Games() {
           <p>Sharpen your memory by matching pairs of educational concepts.</p>
           <div className="game-actions">
             <button className="play-btn">Play Now</button>
-            <a href="#" className="learn-more-link">Learn More</a>
+            <button className="learn-more-link">Learn More</button>
           </div>
         </div>
 
@@ -28,7 +28,7 @@ function Games() {
           <p>Test your knowledge with timed quizzes across various subjects.</p>
           <div className="game-actions">
             <button className="play-btn">Play Now</button>
-            <a href="#" className="learn-more-link">Learn More</a>
+            <button className="learn-more-link">Learn More</button>
           </div>
         </div>
 
@@ -39,7 +39,7 @@ function Games() {
           <p>Unscramble letters to form educational terms and boost your vocabulary.</p>
           <div className="game-actions">
             <button className="play-btn">Play Now</button>
-            <a href="#" className="learn-more-link">Learn More</a>
+            <button className="learn-more-link">Learn More</button>
           </div>
         </div>
 

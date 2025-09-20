@@ -8,9 +8,9 @@ import Leaderboard from './Leaderboard';
 import Games from './Games';
 import DashboardPreview from './DashboardPreview';
 import AboutUs from './AboutUs';
-import LoginSignUp from './LoginSignUp';
 // Removed BlogUpdates import
 import ContactFeedback from './ContactFeedback';
+import ChatScreen from './ChatScreen'; // Import ChatScreen
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           {/* Removed Blog route */}
           <Route path="/contact" element={<ContactFeedback />} />
+          <Route path="/chat" element={<ChatScreen />} /> {/* Add ChatScreen route */}
           {/* Add more routes as needed */}
         </Route>
       </Routes>

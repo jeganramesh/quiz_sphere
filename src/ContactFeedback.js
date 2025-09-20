@@ -99,10 +99,10 @@ function ContactFeedback() {
             <div>
               <h3>Social Media</h3>
               <div className="social-links">
-                <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/quizsphere" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
+                <a href="https://facebook.com/quizsphere" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
+                <a href="https://linkedin.com/company/quizsphere" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/quizsphere" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
               </div>
             </div>
           </div>
