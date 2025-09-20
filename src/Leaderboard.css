@@ -1,0 +1,152 @@
+.leaderboard-page {
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  background-color: #f4f7f6; /* Light background */
+  padding: 40px 20px;
+}
+
+.leaderboard-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.leaderboard-header h1 {
+  font-size: 2.8em;
+  color: #0056b3; /* Navy blue */
+  margin-bottom: 15px;
+}
+
+.leaderboard-header p {
+  font-size: 1.2em;
+  color: #555;
+}
+
+.leaderboard-filters {
+  text-align: center;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.leaderboard-filters select {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: white;
+  cursor: pointer;
+  min-width: 180px; /* Ensure consistent width */
+}
+
+.leaderboard-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto; /* For responsiveness on smaller screens */
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 15px 20px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.leaderboard-table th {
+  background-color: #e0e7ef; /* Lighter shade of navy */
+  font-weight: 600;
+  color: #003366; /* Darker navy */
+}
+
+.leaderboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.leaderboard-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.leaderboard-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.leaderboard-table td:nth-child(1), /* Rank */
+.leaderboard-table td:nth-child(4) { /* Points */
+  text-align: center;
+  font-weight: 500;
+}
+
+.leaderboard-table td:nth-child(2) { /* Avatar cell */
+  display: flex;
+  align-items: center;
+}
+
+.no-results {
+  text-align: center;
+  font-size: 1.2em;
+  color: #777;
+  padding: 40px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .leaderboard-header h1 {
+    font-size: 2.2em;
+  }
+  .leaderboard-filters {
+    flex-direction: column;
+    align-items: center;
+  }
+  .leaderboard-filters select {
+    width: 80%;
+    max-width: 300px;
+  }
+  .leaderboard-table {
+    font-size: 0.9em;
+  }
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 12px 15px;
+  }
+  .leaderboard-avatar {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard-header h1 {
+    font-size: 1.8em;
+  }
+  .leaderboard-header p {
+    font-size: 1em;
+  }
+  .leaderboard-filters select {
+    width: 90%;
+  }
+  .leaderboard-table {
+    font-size: 0.85em;
+  }
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 10px 12px;
+  }
+  .leaderboard-avatar {
+    width: 30px;
+    height: 30px;
+  }
+}

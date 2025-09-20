@@ -1,0 +1,111 @@
+.features-page {
+  font-family: 'Inter', sans-serif; /* Using Inter as per design guidelines */
+  color: #333; /* Default text color, will be overridden by specific styles */
+  background-color: #f4f7f6; /* Light background, can be adjusted */
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.features-header {
+  margin-bottom: 50px;
+}
+
+.features-header h1 {
+  font-size: 2.8em;
+  color: #0056b3; /* Navy blue */
+  margin-bottom: 15px;
+}
+
+.features-header p {
+  font-size: 1.2em;
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align items to the top */
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+  width: 70px; /* Increased icon size */
+  height: 70px;
+  margin-bottom: 20px;
+  /* Assuming icons are in /public/icons/ and are SVG */
+  /* Example: color can be set via fill property if SVG supports it, or use different colored SVGs */
+}
+
+.feature-card h3 {
+  font-size: 1.8em;
+  color: #007bff; /* Teal or a shade of blue */
+  margin-bottom: 15px;
+}
+
+.feature-card p {
+  font-size: 1.1em;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .features-header h1 {
+    font-size: 2.2em;
+  }
+  .features-header p {
+    font-size: 1.1em;
+  }
+  .features-grid {
+    grid-template-columns: 1fr; /* Stack cards on smaller screens */
+  }
+  .feature-card {
+    padding: 25px;
+  }
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .features-header h1 {
+    font-size: 1.8em;
+  }
+  .features-header p {
+    font-size: 1em;
+  }
+  .feature-card {
+    padding: 20px;
+  }
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Placeholder for specific icon colors if needed, assuming SVGs are designed to be colored */
+/* Example:
+.feature-icon[src*="ai-quiz.svg"] { fill: #FFD700; } // Accent Yellow
+.feature-icon[src*="offline.svg"] { fill: #007bff; } // Teal/Blue
+*/
